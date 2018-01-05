@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/BenGitter/ng-pomodoro/issues"
   },
-  "homepage": "https://github.com/BenGitter/ng-pomodoro#readme"
+  "homepage": "https://github.com/BenGitter/ng-pomodoro#readme",
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
 }
