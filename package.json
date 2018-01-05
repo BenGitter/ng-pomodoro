@@ -1,0 +1,19 @@
+{
+  "name": "ng-pomodoro",
+  "version": "1.0.0",
+  "description": "Pomodoro app with Trello integration",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenGitter/ng-pomodoro.git"
+  },
+  "author": "Benjamin van Zwienen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenGitter/ng-pomodoro/issues"
+  },
+  "homepage": "https://github.com/BenGitter/ng-pomodoro#readme"
+}
