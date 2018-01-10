@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const session = require('express-session');
 
+// ENV variables
+require('dotenv').config();
+
 // Passport
 const passport = require('./helpers/passport');
 const { checkAuth, errorHandler } = require('./helpers/utils');
@@ -19,7 +22,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'test-secret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
 }));
@@ -33,11 +36,13 @@ app.use('/auth', authRoutes);
 
 // API Endpoint
 app.get('/api', (req, res) => {
+  if (req.user) res.json(req.user);
   res.status(200).json({ msg: 'API Endpoint' });
 });
 
 // Authenticated route
 app.get('/protected', checkAuth, (req, res) => {
+  console.log(req.user);
   res.json({ msg: 'Logged in' });
 });
 

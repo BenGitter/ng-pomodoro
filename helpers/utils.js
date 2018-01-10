@@ -2,16 +2,19 @@
 const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
 
+// ENV variables
+require('dotenv').config();
+
 // Authentication check function
 exports.checkAuth = expressJwt({
-  secret: 'server-secret',
+  secret: process.env.JWT_SECRET,
 });
 
 // Generate JWT token
 exports.generateToken = (req, res, next) => {
   req.token = jwt.sign({
     id: req.user.id,
-  }, 'server-secret', {
+  }, process.env.JWT_SECRET, {
     expiresIn: '10h',
   });
 

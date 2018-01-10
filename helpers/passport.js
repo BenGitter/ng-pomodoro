@@ -16,9 +16,14 @@ passport.use(new TrelloStrategy({
     name: 'Pomodoro App',
     expiration: 'never',
   },
-}, (req, token, secret, profile, cb) => cb(null, profile)));
+}, (req, token, secret, profile, cb) => {
+  cb(null, { profile, token });
+}));
 
-passport.serializeUser((user, cb) => cb(null, user));
+passport.serializeUser((user, cb) => {
+  cb(null, { id: user.profile.id, token: user.token });
+});
+
 passport.deserializeUser((obj, cb) => cb(null, obj));
 
 module.exports = passport;
