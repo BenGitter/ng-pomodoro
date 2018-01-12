@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
 const session = require('express-session');
+const mongoose = require('mongoose');
 
 // ENV variables
 require('dotenv').config();
@@ -26,6 +27,18 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
+// Mongoose
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.DATABASE_URL, {
+  useMongoClient: true,
+});
+mongoose.connection.on('connected', () => {
+  console.log('Connected to database');
+});
+mongoose.connection.on('error', (err) => {
+  throw new Error(err);
+});
 
 // Setup Passport
 app.use(passport.initialize());

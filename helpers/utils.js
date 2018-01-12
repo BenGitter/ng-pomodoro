@@ -13,7 +13,7 @@ exports.checkAuth = expressJwt({
 // Generate JWT token
 exports.generateToken = (req, res, next) => {
   req.token = jwt.sign({
-    id: req.user.id,
+    id: req.user.profile.id,
   }, process.env.JWT_SECRET, {
     expiresIn: '10h',
   });

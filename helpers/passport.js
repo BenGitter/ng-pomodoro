@@ -2,6 +2,9 @@
 const passport = require('passport');
 const TrelloStrategy = require('passport-trello').Strategy;
 
+// User model
+const User = require('../models/user');
+
 // ENV variables
 require('dotenv').config();
 
@@ -21,7 +24,13 @@ passport.use(new TrelloStrategy({
 }));
 
 passport.serializeUser((user, cb) => {
-  cb(null, { id: user.profile.id, token: user.token });
+  User.findOrCreate({
+    id: user.profile.id,
+    token: user.token,
+  }, (err, doc) => {
+    console.log(doc);
+    cb(err, { id: doc._id });
+  });
 });
 
 passport.deserializeUser((obj, cb) => cb(null, obj));
